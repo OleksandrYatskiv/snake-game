@@ -10,7 +10,6 @@ const canvasY = 1000;
 const initialSnake = [[4, 10], [4, 10]];
 const initialApple = [14, 10];
 const scale = 50;
-const timeDelay = 100;
 const difficultyDelays = {
   easy: 100,
   medium: 75,
@@ -147,7 +146,7 @@ function App() {
         <h2>Player Ratings</h2>
         <ul>
           {JSON.parse(localStorage.getItem('players') || '[]')
-            .filter((player: Player) => player.difficulty === 'easy')
+            .filter((player: Player) => player.difficulty === currentPlayerDifficulty) // Filter based on current player's difficulty
             .sort((a: any, b: any) => b.score - a.score)
             .map((player: any, index: number) => (
               <li key={index}>
@@ -156,6 +155,7 @@ function App() {
             ))}
         </ul>
       </div>
+
     </div>
   );
 }
