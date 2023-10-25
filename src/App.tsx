@@ -11,6 +11,11 @@ const initialSnake = [[4, 10], [4, 10]];
 const initialApple = [14, 10];
 const scale = 50;
 const timeDelay = 100;
+const difficultyDelays = {
+  easy: 100,
+  medium: 75,
+  hard: 50,
+};
 
 function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -20,7 +25,7 @@ function App() {
   const [delay, setDelay] = useState<number | null>(null);
   const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(0);
-  const [openSettings, setOpenSettings] = useState(false); // Change the initial state to false
+  const [openSettings, setOpenSettings] = useState(true); // Change the initial state to false
   const [currentPlayerName, setCurrentPlayerName] = useState<string>('');
   const [currentPlayerDifficulty, setCurrentPlayerDifficulty] = useState<string>('easy');
 
@@ -53,7 +58,7 @@ function App() {
     setSnake(initialSnake);
     setApple(initialApple);
     setDirection([1, 0]);
-    setDelay(timeDelay);
+    setDelay(difficultyDelays[currentPlayerDifficulty as keyof typeof difficultyDelays]); // Use type assertion
     setScore(0);
     setGameOver(false);
   }
